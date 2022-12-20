@@ -111,38 +111,38 @@ public class TEST : MonoBehaviour
       // }
     }
 
-    void ChaseTarget()
-    {
-      navMeshAgent.SetDestination(target.position);
-      toDoAnimator.SetBool("IsWalking", true);
-    }
+//     void ChaseTarget()
+//     {
+//       navMeshAgent.SetDestination(target.position);
+//       toDoAnimator.SetBool("IsWalking", true);
+//     }
 
-    void AttackTarget()
-    {
-      Player player = target.GetComponent<Player>();
-      if(player != null)
-      {
-        player.TakeDamage(this.gameObject, damage);
-        CDTimer = 0;
-      }
-    }
+//     void AttackTarget()
+//     {
+//       Player player = target.GetComponent<Player>();
+//       if(player != null)
+//       {
+//         player.TakeDamage(this.gameObject, damage);
+//         CDTimer = 0;
+//       }
+//     }
 
-    void EngageTarget()
-    {
-      if(distanceToTarget > navMeshAgent.stoppingDistance && distanceToTarget <=  chaseRange)
-      {
+//     void EngageTarget()
+//     {
+//       if(distanceToTarget > navMeshAgent.stoppingDistance && distanceToTarget <=  chaseRange)
+//       {
         
-      }
+//       }
 
-      if(distanceToTarget <= navMeshAgent.stoppingDistance && CDTimer >= coolDown)
-      {
-        AttackTarget();
-      }
-    }
+//       if(distanceToTarget <= navMeshAgent.stoppingDistance && CDTimer >= coolDown)
+//       {
+//         AttackTarget();
+//       }
+//     }
 
-    void OnDrawGizmosSelected()
-    {
-      Gizmos.color = Color.red;
-      Gizmos.DrawWireSphere(transform.position, chaseRange);
-    }
+//     void OnDrawGizmosSelected()
+//     {
+//       Gizmos.color = Color.red;
+//       Gizmos.DrawWireSphere(transform.position, chaseRange);
+//     }
 }
