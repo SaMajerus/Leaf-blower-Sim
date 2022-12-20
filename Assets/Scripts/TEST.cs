@@ -58,8 +58,8 @@ public class TEST : MonoBehaviour
     void Update()
     {
       distanceToTarget = Vector3.Distance(target.position, transform.position);
-      ChaseTarget();
-      EngageTarget();
+      // ChaseTarget();
+      // EngageTarget();
       if(CDTimer < coolDown)
       {
         CDTimer += Time.deltaTime;
