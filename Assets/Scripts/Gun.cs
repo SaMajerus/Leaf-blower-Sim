@@ -21,7 +21,7 @@ public class Gun : MonoBehaviour
   [field: SerializeField]
   private float reloadTime;
   private int ammo;
-  private bool isReloading = false;
+  private bool isIdling = false;
 
   public Camera fpsCam;
   public ParticleSystem muzzleFlash;
@@ -49,7 +49,7 @@ public class Gun : MonoBehaviour
 
     if(ammo == 0)
     {
-      StartCoroutine(Reload());
+      StartCoroutine(Idle());
       return;
     }
 
@@ -65,7 +65,7 @@ public class Gun : MonoBehaviour
 
     if(Input.GetKeyDown(KeyCode.R))
     {
-      StartCoroutine(Reload());
+      StartCoroutine(Idle());
       return;
     }
   }
@@ -96,16 +96,16 @@ public class Gun : MonoBehaviour
     }
   }
 
-  IEnumerator Reload()
+  IEnumerator Idle()
   {
-    isReloading = true;
-    gun_Animator.SetTrigger("Reload");
+    isIdling = true;
+    gun_Animator.SetTrigger("Idle");
     Debug.Log("reloading...");
     yield return new WaitForSeconds(reloadTime);
-    Debug.Log("reload done! Pew pew!");
+    Debug.Log("Engine now idling!");
     ammo = maxAmmo;
     _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
-    isReloading = false;
+    isIdling = false;
   }
 
 }
