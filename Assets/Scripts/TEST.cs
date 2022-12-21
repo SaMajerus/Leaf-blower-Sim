@@ -48,7 +48,7 @@ public class TEST : MonoBehaviour
     void Start()
     {
       CDTimer = coolDown;
-      target = GameObject.Find("Player").GetComponent<Transform>();
+      target = GameObject.Find("Player 1").GetComponent<Transform>();
       navMeshAgent = GetComponent<NavMeshAgent>();
       _waveManager = GameObject.Find("WaveManager").GetComponent<EnemyWaves>();
       toDoAnimator = gameObject.GetComponent<Animator>(); 
