@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
 
+/*
 // ===========AI Variable===============
   [SerializeField] Transform target;
   [SerializeField] float chaseRange = 5f;
@@ -114,5 +115,6 @@ public class EnemyAI : MonoBehaviour
       Gizmos.color = Color.red;
       Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
+*/
 }
 
