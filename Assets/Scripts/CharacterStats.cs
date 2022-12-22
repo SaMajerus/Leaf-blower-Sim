@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-  [SerializeField] protected int currentHealth;
-  [SerializeField] protected int maxHealth;
+  // [SerializeField] protected int currentHealth;
+  // [SerializeField] protected int maxHealth;
 
-  [SerializeField] protected bool isDead;
+  // [SerializeField] protected bool isDead;
   [SerializeField]UIManager _uiManager;
 
 
@@ -24,59 +24,59 @@ public class CharacterStats : MonoBehaviour
       }
     }
 
-  public void CheckHealth()
-    {
-      Debug.Log("current health" + currentHealth);
-      if (currentHealth <= 0)
-      {
-        currentHealth = 0;
-        Die();
-      }
+//   public void CheckHealth()
+//     {
+//       Debug.Log("current health" + currentHealth);
+//       if (currentHealth <= 0)
+//       {
+//         currentHealth = 0;
+//         Die();
+//       }
 
-      if(currentHealth >= maxHealth)
-      {
-        currentHealth = maxHealth;
-      }
-    }
+//       if(currentHealth >= maxHealth)
+//       {
+//         currentHealth = maxHealth;
+//       }
+//     }
 
-  public void Die()
-    {
-      Debug.Log("Player is dead!");
-      isDead = true;
-      _uiManager.GameOver();
-    }
+//   public void Die()
+//     {
+//       Debug.Log("Player is dead!");
+//       isDead = true;
+//       _uiManager.GameOver();
+//     }
   
-  private void SetHealthTo(int healthToSetTo)
-    {
-      currentHealth = healthToSetTo;
-      CheckHealth();
-    }
+//   private void SetHealthTo(int healthToSetTo)
+//     {
+//       currentHealth = healthToSetTo;
+//       CheckHealth();
+//     }
   
-  public void TakeDamage(int damage)
-    {
-      int healthAfterDamage = currentHealth - damage;
-      SetHealthTo(healthAfterDamage);
-    }
+//   public void TakeDamage(int damage)
+//     {
+//       int healthAfterDamage = currentHealth - damage;
+//       SetHealthTo(healthAfterDamage);
+//     }
   
-  public void Heal(int heal)
-    {
-      int healthAfterHeal = currentHealth + heal;
-      SetHealthTo(healthAfterHeal);
-    }
+//   public void Heal(int heal)
+//     {
+//       int healthAfterHeal = currentHealth + heal;
+//       SetHealthTo(healthAfterHeal);
+//     }
 
-  public int GetMaxHealth()
-    {
-      return maxHealth;
-    }
+//   public int GetMaxHealth()
+//     {
+//       return maxHealth;
+//     }
   
-  public int GetCurrentHealth()
-    {
-      return currentHealth;
-    }
-  public void InitVariables()
-    {
-      maxHealth = 100;
-      SetHealthTo(maxHealth);
-      isDead = false;
-    }
+//   public int GetCurrentHealth()
+//     {
+//       return currentHealth;
+//     }
+//   public void InitVariables()
+//     {
+//       maxHealth = 100;
+//       SetHealthTo(maxHealth);
+//       isDead = false;
+//     }
 }

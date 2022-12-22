@@ -5,12 +5,12 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI _waveCounter; 
-    [SerializeField]
-    private TextMeshProUGUI _scoreCounter;
-    [SerializeField]
-    private TextMeshProUGUI _ammoCounter;
+    // [SerializeField]
+    // private TextMeshProUGUI _waveCounter; 
+    // [SerializeField]
+    // private TextMeshProUGUI _scoreCounter;
+    // [SerializeField]
+    // private TextMeshProUGUI _ammoCounter;
     [SerializeField]
     private GameObject _gameOverUi;
     // private TextMeshProUGUI _enemiesLeft;
@@ -31,21 +31,21 @@ public class UIManager : MonoBehaviour
       //"Inside UI Manager script.." ('Update UI Show Wave', Step 1). 
 
 
-  public void UpdateWaveStartDisplay(int currentWave)
-  {
-    _waveCounter.gameObject.SetActive(true); 
-    _waveCounter.text = "Wave: " + currentWave; 
-  }
+  // public void UpdateWaveStartDisplay(int currentWave)
+  // {
+  //   _waveCounter.gameObject.SetActive(true); 
+  //   _waveCounter.text = "Wave: " + currentWave; 
+  // }
 
-  public void UpdateScoreDisplay(int score)
-  {
-    _scoreCounter.text = "Score: " + score;
-  }
+  // public void UpdateScoreDisplay(int score)
+  // {
+  //   _scoreCounter.text = "Score: " + score;
+  // }
 
-  public void UpdateAmmoDisplay(int ammo, int maxAmmo)
-  {
-    _ammoCounter.text = "Ammo: " + ammo + "/" + maxAmmo;
-  }
+  // public void UpdateAmmoDisplay(int ammo, int maxAmmo)
+  // {
+  //   _ammoCounter.text = "Ammo: " + ammo + "/" + maxAmmo;
+  // }
 
   // public void UpdateEnemiesToSpawn(int enemiesToSpawn)
   // {
