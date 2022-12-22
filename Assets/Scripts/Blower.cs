@@ -38,9 +38,10 @@ public class Blower : MonoBehaviour
     clips = gameObject.GetComponents<AudioSource>();  //P-code note: 'Start idle-engine noise'
     _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     CDTimer = coolDown;
-    ammo = maxAmmo;
-    _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
+    // ammo = maxAmmo;
+    // _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
   }
+  
   // Update is called once per frame
   void Update()
   {
@@ -63,16 +64,16 @@ public class Blower : MonoBehaviour
     {
       CDTimer = 0;
       Blow();  //ISSUE
-    }
+    }   /*
     else
     {  //I'm intending for this to essentially reset the engine/RPM State (in a sense) to Idle. 
       StartCoroutine(Idle());
       return; 
-    }
+    }*/ 
 
     if(Input.GetKeyDown(KeyCode.R))
     {
-      StartCoroutine(Idle());
+      // StartCoroutine(Idle());
       return;
     }
   }
@@ -81,9 +82,9 @@ public class Blower : MonoBehaviour
   {
     muzzleFlash.Play();
     clips[Random.Range(0, clips.Length)].Play();
-    ammo--;
+    // ammo--;
     RaycastHit hit;
-    _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);  //Updates ammo count after Gun is fired. 
+    // _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);  //Updates ammo count after Gun is fired. 
     if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
     {
       Debug.Log(hit.transform.name);
@@ -103,19 +104,20 @@ public class Blower : MonoBehaviour
     }
   }
 
+/*
   IEnumerator Idle()
   {
     isIdling = true;
     blower_Animator.SetTrigger("Idle");
     Debug.Log("reloading...");
-    yield return new WaitForSeconds(reloadTime);
+    // yield return new WaitForSeconds(reloadTime);
     Debug.Log("Engine now idling!");
     // ammo = maxAmmo;
     // _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
     isIdling = false;
   }
 
-/*
+
   IEnumerator Refuel()  //Will develop further once this mechanic/feature is added. 
   {
     isRefueling = true;

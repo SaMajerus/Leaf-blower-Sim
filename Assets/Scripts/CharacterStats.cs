@@ -13,7 +13,7 @@ public class CharacterStats : MonoBehaviour
 
   private void Start()
     {
-      InitVariables();
+      //InitVariables();
       _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
       if(_uiManager == null)
       {

@@ -39,8 +39,8 @@ public class TEST : MonoBehaviour
   {
     Debug.Log(name + " has died due to being shot!");
     Destroy(gameObject);
-    _waveManager.UpdateScore();
-    _waveManager.enemiesLeft--;
+    // _waveManager.UpdateScore();
+    // _waveManager.enemiesLeft--;
   }
   // ====================================
 
