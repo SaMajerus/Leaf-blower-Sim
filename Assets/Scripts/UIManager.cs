@@ -61,8 +61,8 @@ public class UIManager : MonoBehaviour
   {
     Time.timeScale = 0f;
     Debug.Log("Playing Game Over");
-      Cursor.visible = true;  //Shows cursor
-      Cursor.lockState = CursorLockMode.None;
-      _gameOverUi.SetActive(true);
+    Cursor.visible = true;  //Shows cursor
+    Cursor.lockState = CursorLockMode.None;
+    _gameOverUi.SetActive(true);
   }
 }
