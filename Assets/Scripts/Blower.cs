@@ -17,13 +17,15 @@ public class Blower : MonoBehaviour
   private float coolDown = 1f;
   float CDTimer;
 
-  // **Will refactor as a Fuel-remaining system, probably. 
+// **Will refactor "Ammo" as "Fuel Remaining" in the future, most likely.  
   // [field: SerializeField]
   // private int maxAmmo = 10;
   // [field: SerializeField]
   // private float reloadTime;
   // private int ammo;
-  private bool isIdling = false;
+  private bool isIdling = true;
+  private bool isBlowing = false;
+  // float distanceToTarget = Mathf.Infinity;  //Copied from 'AI Variables' in TEST.cs (now 'LeafLogic.cs'). 
 
   public Camera fpsCam;
   public ParticleSystem muzzleFlash;
@@ -80,8 +82,9 @@ public class Blower : MonoBehaviour
 
   void Blow ()
   {
+    isBlowing = true; 
     muzzleFlash.Play();
-    clips[Random.Range(0, clips.Length)].Play();
+    // clips[Random.Range(0, clips.Length)].Play();
     // ammo--;
     RaycastHit hit;
     // _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);  //Updates ammo count after Gun is fired. 
@@ -104,30 +107,27 @@ public class Blower : MonoBehaviour
     }
   }
 
-/*
+
   IEnumerator Idle()
   {
     isIdling = true;
+    isBlowing = false; 
     blower_Animator.SetTrigger("Idle");
-    Debug.Log("reloading...");
-    // yield return new WaitForSeconds(reloadTime);
-    Debug.Log("Engine now idling!");
-    // ammo = maxAmmo;
-    // _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
+    Debug.Log("Idling!");
+    yield return new WaitForSeconds(isBlowing);
+    Debug.Log("Blowing!");
     isIdling = false;
   }
 
-
+/*
   IEnumerator Refuel()  //Will develop further once this mechanic/feature is added. 
   {
     isRefueling = true;
-    // *Engine Shut-off*
+    // *Engine Shut-off sound*
     blower_Animator.SetTrigger("Refuel");
-    Debug.Log("refuelling...");
+    Debug.Log("Refueling...");
     yield return new WaitForSeconds(refuelTime);
-    Debug.Log("Refueled!");
-    // ammo = maxAmmo;
-    // _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
+    Debug.Log("Refueled!"); 
     fuel = maxFuel;
     _uiManager.UpdateRefuelDisplay(fuel, maxFuel);
     isRefueling = false;
