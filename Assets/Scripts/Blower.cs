@@ -66,9 +66,10 @@ public class Blower : MonoBehaviour
     // {
     //   CDTimer += Time.deltaTime;
     // }
-    if (Input.GetButton("Fire1") && isBlowing == false/*&& CDTimer >= coolDown && ammo > 0*/)
+    if (Input.GetButton("Fire1") /*&& isBlowing == false*//*&& CDTimer >= coolDown && ammo > 0*/)
     {
       // CDTimer = 0;
+      Debug.Log("Calling 'Blow' function");
       Blow(); 
       
     } 
@@ -93,6 +94,7 @@ public class Blower : MonoBehaviour
 
   void Blow ()
   {
+    Debug.Log("(Top of Blow function reached)");
     isBlowing = true; 
     //muzzleFlash.Play();
     // clips[Random.Range(0, clips.Length)].Play();
@@ -107,6 +109,7 @@ public class Blower : MonoBehaviour
       if (hit.rigidbody != null)
       {
         hit.rigidbody.AddForceAtPosition(hit.point, -hit.normal * impactForce, impactEffect);
+        Debug.Log("Force added to impacted object's rigidbody!");
       }
 
       // TEST enemy = hit.transform.GetComponent<TEST>();
