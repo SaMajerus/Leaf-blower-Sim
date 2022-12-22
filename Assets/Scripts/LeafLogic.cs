@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TEST : MonoBehaviour
+// public class TEST : MonoBehaviour
+public class LeafLogic : MonoBehaviour
 {
 // ===========AI Variable===============
   [field: SerializeField] Transform target;
-  [field: SerializeField] float chaseRange = 5f;
-  [field: SerializeField] private EnemyWaves _waveManager;
-  NavMeshAgent navMeshAgent;
+  // [field: SerializeField] float chaseRange = 5f;
+  // [field: SerializeField] private EnemyWaves _waveManager;
+  // NavMeshAgent navMeshAgent;
   float distanceToTarget = Mathf.Infinity;
-  bool isProvoked = false;
-  [field: SerializeField]
-  int damage = 5;
-  [field: SerializeField]
-  float coolDown { get; set; } = 1f;
-  float CDTimer;
+  // bool isProvoked = false;
+  // [field: SerializeField]
+  // int damage = 5;
+  // [field: SerializeField]
+  // float coolDown { get; set; } = 1f;
+  // float CDTimer;
   // private float attackSpeed { get; set; } = 1f;
   
   // ==========Animation Variables===========
