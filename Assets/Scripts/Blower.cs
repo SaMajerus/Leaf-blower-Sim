@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Blower : MonoBehaviour
 {
-  Animator gun_Animator;
-  AudioSource gun_AudioSource;
+  Animator blower_Animator;
+  AudioSource blower_AudioSource;
 
   private AudioSource[] clips;
 
-  public float damage = 10f;
+  // public float damage = 10f;
   public float range = 100f;
   public float impactForce = 30f;
 
   [field: SerializeField]
   private float coolDown = 1f;
   float CDTimer;
-  [field: SerializeField]
-  private int maxAmmo = 10;
-  [field: SerializeField]
-  private float reloadTime;
-  private int ammo;
+
+  // **Will refactor as a Fuel-remaining system, probably. 
+  // [field: SerializeField]
+  // private int maxAmmo = 10;
+  // [field: SerializeField]
+  // private float reloadTime;
+  // private int ammo;
   private bool isIdling = false;
 
   public Camera fpsCam;
@@ -32,8 +34,8 @@ public class Gun : MonoBehaviour
 
   void Start()
   {
-    gun_Animator = gameObject.GetComponent<Animator>();
-    clips = gameObject.GetComponents<AudioSource>();
+    blower_Animator = gameObject.GetComponent<Animator>();
+    clips = gameObject.GetComponents<AudioSource>();  //P-code note: 'Start idle-engine noise'
     _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     CDTimer = coolDown;
     ammo = maxAmmo;
@@ -47,20 +49,25 @@ public class Gun : MonoBehaviour
       return;
     }
 
-    if(ammo == 0)
-    {
-      StartCoroutine(Idle());
-      return;
-    }
+    // if(ammo == 0)
+    // {
+    //   StartCoroutine(Idle());
+    //   return;
+    // }
 
-    if(CDTimer < coolDown)
-    {
-      CDTimer += Time.deltaTime;
-    }
-    if (Input.GetButton("Fire1") && CDTimer >= coolDown && ammo > 0)
+    // if(CDTimer < coolDown)
+    // {
+    //   CDTimer += Time.deltaTime;
+    // }
+    if (Input.GetButton("Fire1") /*&& CDTimer >= coolDown && ammo > 0*/)
     {
       CDTimer = 0;
-      Shoot();  //ISSUE
+      Blow();  //ISSUE
+    }
+    else
+    {  //I'm intending for this to essentially reset the engine/RPM State (in a sense) to Idle. 
+      StartCoroutine(Idle());
+      return; 
     }
 
     if(Input.GetKeyDown(KeyCode.R))
@@ -70,7 +77,7 @@ public class Gun : MonoBehaviour
     }
   }
 
-  void Shoot ()
+  void Blow ()
   {
     muzzleFlash.Play();
     clips[Random.Range(0, clips.Length)].Play();
@@ -87,25 +94,42 @@ public class Gun : MonoBehaviour
         hit.rigidbody.AddForce(-hit.normal * impactForce);
       }
 
-      TEST enemy = hit.transform.GetComponent<TEST>();
+      // TEST enemy = hit.transform.GetComponent<TEST>();
       
-      if (enemy != null) 
-      {
-        enemy.TakeDamage(damage);  //ISSUE
-      }
+      // if (enemy != null) 
+      // {
+      //   enemy.TakeDamage(damage);  //ISSUE
+      // }
     }
   }
 
   IEnumerator Idle()
   {
     isIdling = true;
-    gun_Animator.SetTrigger("Idle");
+    blower_Animator.SetTrigger("Idle");
     Debug.Log("reloading...");
     yield return new WaitForSeconds(reloadTime);
     Debug.Log("Engine now idling!");
-    ammo = maxAmmo;
-    _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
+    // ammo = maxAmmo;
+    // _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
     isIdling = false;
   }
+
+/*
+  IEnumerator Refuel()  //Will develop further once this mechanic/feature is added. 
+  {
+    isRefueling = true;
+    // *Engine Shut-off*
+    blower_Animator.SetTrigger("Refuel");
+    Debug.Log("refuelling...");
+    yield return new WaitForSeconds(refuelTime);
+    Debug.Log("Refueled!");
+    // ammo = maxAmmo;
+    // _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
+    fuel = maxFuel;
+    _uiManager.UpdateRefuelDisplay(fuel, maxFuel);
+    isRefueling = false;
+  }
+*/
 
 }
