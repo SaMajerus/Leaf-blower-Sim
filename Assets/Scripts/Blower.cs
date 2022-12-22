@@ -7,23 +7,25 @@ public class Blower : MonoBehaviour
   Animator blower_Animator;
   AudioSource blower_AudioSource;
 
-  private AudioSource[] clips;
+  //private AudioSource[] clips;
 
-  // public float damage = 10f;
-  public float range = 100f;
+  public float range = 10f;
   public float impactForce = 30f;
 
-  [field: SerializeField]
-  private float coolDown = 1f;
-  float CDTimer;
+  // [field: SerializeField]
+  // private float coolDown = 1f;
+  // float CDTimer;
 
-// **Will refactor "Ammo" as "Fuel Remaining" in the future, most likely.  
-  // [field: SerializeField]
-  // private int maxAmmo = 10;
-  // [field: SerializeField]
-  // private float reloadTime;
-  // private int ammo;
-  private bool isIdling = true;
+// **Will refactor  'ammo'/etc  as  'fuel'/etc  in the future, most likely.  
+  /*
+  [field: SerializeField]
+  private int maxAmmo = 10;
+  [field: SerializeField]
+  private float reloadTime;
+  private int ammo;
+  */ 
+
+  //private bool isIdling = true;
   private bool isBlowing = false;
   // float distanceToTarget = Mathf.Infinity;  //Copied from 'AI Variables' in TEST.cs (now 'LeafLogic.cs'). 
 
@@ -37,9 +39,9 @@ public class Blower : MonoBehaviour
   void Start()
   {
     blower_Animator = gameObject.GetComponent<Animator>();
-    clips = gameObject.GetComponents<AudioSource>();  //P-code note: 'Start idle-engine noise'
+    //clips = gameObject.GetComponents<AudioSource>();  //P-code note: 'Start idle-engine noise'
     _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-    CDTimer = coolDown;
+    // CDTimer = coolDown;
     // ammo = maxAmmo;
     // _uiManager.UpdateAmmoDisplay(ammo, maxAmmo);
   }
@@ -47,7 +49,7 @@ public class Blower : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if(isIdling)
+    if(!isBlowing)
     {
       return;
     }
@@ -62,22 +64,23 @@ public class Blower : MonoBehaviour
     // {
     //   CDTimer += Time.deltaTime;
     // }
-    if (Input.GetButton("Fire1") /*&& CDTimer >= coolDown && ammo > 0*/)
+    if (Input.GetButton("Fire1") && isBlowing == false/*&& CDTimer >= coolDown && ammo > 0*/)
     {
-      CDTimer = 0;
-      Blow();  //ISSUE
-    }   /*
+      // CDTimer = 0;
+      Blow(); 
+    } 
     else
-    {  //I'm intending for this to essentially reset the engine/RPM State (in a sense) to Idle. 
-      StartCoroutine(Idle());
+    {  //I'm intending for this to essentially reset the Blower to its default State: Idle/not-Blowing. 
+      StartCoroutine(Idle()); 
       return; 
-    }*/ 
+    } 
 
+/*
     if(Input.GetKeyDown(KeyCode.R))
     {
-      // StartCoroutine(Idle());
+      // StartCoroutine(Refuel());
       return;
-    }
+    }*/
   }
 
   void Blow ()
@@ -110,13 +113,19 @@ public class Blower : MonoBehaviour
 
   IEnumerator Idle()
   {
-    isIdling = true;
     isBlowing = false; 
     blower_Animator.SetTrigger("Idle");
     Debug.Log("Idling!");
-    yield return new WaitForSeconds(isBlowing);
-    Debug.Log("Blowing!");
-    isIdling = false;
+    // yield return new WaitForSeconds();
+    if(isBlowing){
+      Debug.Log("Blowing!");
+      isBlowing = true;
+      return; 
+    }
+    else
+    {
+      yield return new WaitForSeconds(1f);   //My idea, based on my limited understanding [currently], is that it'll wait for 1 second before checking if the Player has clicked the 'Fire1' button since the last check. 
+    }
   }
 
 /*
@@ -131,7 +140,6 @@ public class Blower : MonoBehaviour
     fuel = maxFuel;
     _uiManager.UpdateRefuelDisplay(fuel, maxFuel);
     isRefueling = false;
-  }
-*/
+  } */
 
 }
