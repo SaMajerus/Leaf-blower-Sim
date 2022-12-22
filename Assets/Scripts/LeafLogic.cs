@@ -8,16 +8,20 @@ public class LeafLogic : MonoBehaviour
 {
 // ===========AI Variable===============
   [field: SerializeField] Transform target;
-  // [field: SerializeField] float chaseRange = 5f;
-  // [field: SerializeField] private EnemyWaves _waveManager;
-  // NavMeshAgent navMeshAgent;
+  /*
+  [field: SerializeField] float chaseRange = 5f;
+  [field: SerializeField] private EnemyWaves _waveManager;
+  NavMeshAgent navMeshAgent;
+  */
   float distanceToTarget = Mathf.Infinity;
-  // bool isProvoked = false;
-  // [field: SerializeField]
-  // int damage = 5;
-  // [field: SerializeField]
-  // float coolDown { get; set; } = 1f;
-  // float CDTimer;
+  /*
+  bool isProvoked = false;
+  [field: SerializeField]
+  int damage = 5;
+  [field: SerializeField]
+  float coolDown { get; set; } = 1f;
+  float CDTimer;
+  */
   // private float attackSpeed { get; set; } = 1f;
   
   // ==========Animation Variables===========
@@ -48,10 +52,10 @@ public class LeafLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      CDTimer = coolDown;
+      // CDTimer = coolDown;
       target = GameObject.Find("Player 1").GetComponent<Transform>();
-      navMeshAgent = GetComponent<NavMeshAgent>();
-      _waveManager = GameObject.Find("WaveManager").GetComponent<EnemyWaves>();
+      //navMeshAgent = GetComponent<NavMeshAgent>();
+      //_waveManager = GameObject.Find("WaveManager").GetComponent<EnemyWaves>();
       toDoAnimator = gameObject.GetComponent<Animator>(); 
     }
 
@@ -61,10 +65,10 @@ public class LeafLogic : MonoBehaviour
       distanceToTarget = Vector3.Distance(target.position, transform.position);
       // ChaseTarget();
       // EngageTarget();
-      if(CDTimer < coolDown)
-      {
-        CDTimer += Time.deltaTime;
-      }
+      // if(CDTimer < coolDown)
+      // {
+      //   CDTimer += Time.deltaTime;
+      // }
 
     // // AI's Attack/Engage/(something else?)  Logic 
     //   if(distanceToTarget <= chaseRange)
