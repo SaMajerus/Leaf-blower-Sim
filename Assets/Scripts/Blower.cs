@@ -10,7 +10,7 @@ public class Blower : MonoBehaviour
   //private AudioSource[] clips;
 
   public float range = 10f;
-  public float impactForce = 30f;
+  public float impactForce = 32f;
 
   // [field: SerializeField]
   // private float coolDown = 1f;
@@ -30,8 +30,8 @@ public class Blower : MonoBehaviour
   // float distanceToTarget = Mathf.Infinity;  //Copied from 'AI Variables' in TEST.cs (now 'LeafLogic.cs'). 
 
   public Camera fpsCam;
-  public ParticleSystem muzzleFlash;
-  public GameObject impactEffect;
+  // public ParticleSystem muzzleFlash;
+  public ForceMode impactEffect = ForceMode.Impulse;
 
   [field: SerializeField]
   private UIManager _uiManager;
@@ -51,10 +51,10 @@ public class Blower : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if(!isBlowing)
-    {
-      return;
-    }
+    // if(!isBlowing)
+    // {
+    //   return;
+    // }
 
     // if(ammo == 0)
     // {
@@ -70,10 +70,12 @@ public class Blower : MonoBehaviour
     {
       // CDTimer = 0;
       Blow(); 
+      
     } 
     else
     {  //I'm intending for this to essentially reset the Blower to its default State: Idle/not-Blowing. 
-      StartCoroutine(Idle()); 
+      isBlowing=false; 
+      // StartCoroutine(Idle()); 
       return; 
     } 
 
@@ -83,6 +85,10 @@ public class Blower : MonoBehaviour
       // StartCoroutine(Refuel());
       return;
     }*/
+  }
+
+  void FixedUpdate(){
+
   }
 
   void Blow ()
@@ -96,11 +102,11 @@ public class Blower : MonoBehaviour
     if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
     {
       Debug.Log(hit.transform.name);
-      GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+      // GameObject impactGO = Instantiate(/*impactEffect,*/ hit.point, Quaternion.LookRotation(hit.normal));
       //Destroy(impactGO, 2f);  //To GameObject: "Destroy yourself after you've existed for 2 seconds (about same length as hit impact animation)"
       if (hit.rigidbody != null)
       {
-        hit.rigidbody.AddForce(-hit.normal * impactForce);
+        hit.rigidbody.AddForceAtPosition(hit.point, -hit.normal * impactForce, impactEffect);
       }
 
       // TEST enemy = hit.transform.GetComponent<TEST>();
@@ -112,23 +118,26 @@ public class Blower : MonoBehaviour
     }
   }
 
-
+/*
   IEnumerator Idle()
   {
     isBlowing = false; 
     blower_Animator.SetTrigger("Idle");
     Debug.Log("Idling!");
-    // yield return new WaitForSeconds();
-    if(isBlowing){
-      Debug.Log("Blowing!");
-      isBlowing = true;
-      return; 
-    }
-    else
-    {
-      yield return new WaitForSeconds(1f);   //My idea, based on my limited understanding [currently], is that it'll wait for 1 second before checking if the Player has clicked the 'Fire1' button since the last check. 
-    }
-  }
+    yield return new WaitForSeconds(1f);
+    Debug.Log("Blowing!");
+    isBlowing = true;
+    return;
+    // if(isBlowing){
+    //   Debug.Log("Blowing!");
+    //   isBlowing = true;
+    //   return; 
+    // }
+    // else
+    // {
+    //   yield return new WaitForSeconds(1f);   //My idea, based on my limited understanding [currently], is that it'll wait for 1 second before checking if the Player has clicked the 'Fire1' button since the last check. 
+    // }
+  } */
 
 /*
   IEnumerator Refuel()  //Will develop further once this mechanic/feature is added. 
