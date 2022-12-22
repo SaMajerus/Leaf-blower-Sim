@@ -35,6 +35,8 @@ public class Blower : MonoBehaviour
 
   [field: SerializeField]
   private UIManager _uiManager;
+  // [field: SerializeField]
+  // private ForceController forceCtrl;
 
   void Start()
   {
@@ -86,7 +88,7 @@ public class Blower : MonoBehaviour
   void Blow ()
   {
     isBlowing = true; 
-    muzzleFlash.Play();
+    //muzzleFlash.Play();
     // clips[Random.Range(0, clips.Length)].Play();
     // ammo--;
     RaycastHit hit;
@@ -95,7 +97,7 @@ public class Blower : MonoBehaviour
     {
       Debug.Log(hit.transform.name);
       GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-      Destroy(impactGO, 2f);  //To GameObject: "Destroy yourself after you've existed for 2 seconds (about same length as hit impact animation)"
+      //Destroy(impactGO, 2f);  //To GameObject: "Destroy yourself after you've existed for 2 seconds (about same length as hit impact animation)"
       if (hit.rigidbody != null)
       {
         hit.rigidbody.AddForce(-hit.normal * impactForce);
